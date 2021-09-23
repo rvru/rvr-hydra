@@ -15,7 +15,7 @@ benchmarks/README.
 ### SETUP:
 
 ##### 1. Set up the RISC-V gcc compiler.
-Download the [Linux Freedom Studio](https://www.sifive.com/boards) package
+Download the [Linux Freedom Studio](https://www.sifive.com/software) package
 from SiFive.  Unzip/install Freedom Studio and note the install directory.
 
 Update the RISC-V gcc executable path in
