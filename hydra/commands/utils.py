@@ -22,7 +22,7 @@ Authors: Jennifer Hellar
 import os
 import sys
 
-from .constants import BENCHMARKS
+from .constants import BENCHMARKS, ARM_ROOT
 
 def get_cc_objdump_optflags(benchmark_name, toolchain):
         """
@@ -222,7 +222,7 @@ def write_sub_makefiles(benchmark_name, file_name, toolchain):
 
     with open(file_name, 'w+') as makefile:
         if toolchain == 'arm':
-            makefile.write('ARM_ROOT=/home/jlh24/arm/developmentstudio-2020.1-1/sw/ARMCompiler5.06u7/\n\n')
+            makefile.write('ARM_ROOT=' + ARM_ROOT + '\n\n')
 
         makefile.write('CC = ' + cc + '\n')
         makefile.write('override CFLAGS += ' + ccflags + '\n')
