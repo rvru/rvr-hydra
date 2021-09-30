@@ -9,6 +9,7 @@ hydra/__pycache__
 *.mk
 makefile
 *disassembly.txt
+*.xlsx
 
 # Prerequisites
 *.d
