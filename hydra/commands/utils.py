@@ -22,7 +22,7 @@ Authors: Jennifer Hellar
 import os
 import sys
 
-from .constants import BENCHMARKS, ARM_ROOT
+from .constants import BENCHMARKS
 
 def get_cc_objdump_optflags(benchmark_name, toolchain):
         """
@@ -35,8 +35,9 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
             cc = 'armcc'
             ld = 'armar'
             objdump = 'objdump'
-            # ccflags = '-c --preinclude=$(ARM_ROOT)include/stdint.h --cpu=Cortex-M0plus --c99 --no-inline -O2 -Ospace'
-            ccflags = '-c --preinclude=$(ARM_ROOT)include/stdint.h --cpu=Cortex-M4 --c99 --no-inline -O2 -Ospace'
+            ARM_ROOT = os.environ.get('ARM_ROOT')
+            ccflags = '-c --preinclude=' + ARM_ROOT + 'include/stdint.h --cpu=Cortex-M0plus --c99 --no-inline -O2 -Ospace'
+            # ccflags = '-c --preinclude=$(ARM_ROOT)include/stdint.h --cpu=Cortex-M4 --c99 --no-inline -O2 -Ospace'
             ldflags = '-r'
         elif toolchain == 'rvgcc':
             cc = 'riscv64-unknown-elf-gcc'
@@ -222,7 +223,7 @@ def write_sub_makefiles(benchmark_name, file_name, toolchain):
 
     with open(file_name, 'w+') as makefile:
         if toolchain == 'arm':
-            makefile.write('ARM_ROOT=' + ARM_ROOT + '\n\n')
+            makefile.write('ARM_ROOT=' + os.environ.get('ARM_ROOT') + '\n\n')
 
         makefile.write('CC = ' + cc + '\n')
         makefile.write('override CFLAGS += ' + ccflags + '\n')

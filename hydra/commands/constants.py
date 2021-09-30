@@ -14,5 +14,3 @@ BENCHMARKS = ['WatermanBenchmark', 'fir_filter', 'aha_mont64', 'crc32',
                 'sglib_combined', 'slre', 'st', 'statemate', 'ud', 'wikisort']
 
 SUPPORTED_TOOLCHAINS = ['arm', 'rvgcc', 'armgcc']
-
-ARM_ROOT = "Your ARM root path here"

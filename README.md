@@ -18,26 +18,19 @@ benchmarks/README.
 Download the [Linux Freedom Studio](https://www.sifive.com/software) package
 from SiFive.  Unzip/install Freedom Studio and note the install directory.
 
-Update the RISC-V gcc executable path in
-risc-v-analyzer/bin/setup_script_env.bash to point to the compiler executables
-e.g. /home/jlh24/FreedomStudio/SiFive/riscv64-unknown-elf-gcc-10.1.0-2020.08.2/bin
+Create a new file **rvr-hydra/bin/setup_script_env.bash** based on the provided
+template setup_script_env_template.bash. Update the RISC-V gcc executable path
+in setup_script_env.bash to point to the RISC-V compiler executables.
 
 ##### 2. Set up the ARM gcc compiler.
-Download the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads).
-Unzip and follow the installation instructions.
+Download the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads). Unzip and follow the installation instructions.
 
-Update the ARM gcc executable paths in rvr-hydra/bin/setup_script_env.bash e.g.
-/home/jlh24/arm/gnu-arm-embedded/gcc-arm-none-eabi-10-2020q4/arm-none-eabi/bin
-and
-/home/jlh24/arm/gnu-arm-embedded/gcc-arm-none-eabi-10-2020q4/bin
+Update the ARM gcc executable paths in setup_script_env.bash.
 
 ##### 3. Set up the ARM compiler (license required).
 Depending on your license type and ARM compiler install location, update the
-ARM compiler executable path, the license file path, and ARM product def.
-
-Additionally, in hydra/commands/utils.py function write_sub_makefiles(), update
-the ARM_ROOT (line 205) with the compiler path e.g.
-/home/jlh24/arm/developmentstudio-2020.1-1/sw/ARMCompiler5.06u7/
+ARM compiler paths, the license file path, and ARM product def in
+setup_script_env.bash.
 
 ##### 4. Set up a virtual environment 'env' and install Python requirements:
 cd rvr-hydra/

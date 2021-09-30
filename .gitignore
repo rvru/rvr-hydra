@@ -1,5 +1,5 @@
 env
-venv
+bin/setup_script_env.bash
 
 /hydra/commands/__pycache__
 hydra/__pycache__
