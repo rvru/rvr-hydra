@@ -228,4 +228,4 @@ def write_sub_makefiles(benchmark_name, file_name, toolchain):
         makefile.write('override CFLAGS += ' + ccflags + '\n')
         makefile.write('LD = ' + ld + '\n')
         makefile.write('LDFLAGS = ' + ldflags + '\n')
-        makefile.write('TARGET = ' + benchmark_name + '_' + toolchain + '.a\n')
+        makefile.write('TARGET = ' + toolchain + '_' + benchmark_name + '.a\n')

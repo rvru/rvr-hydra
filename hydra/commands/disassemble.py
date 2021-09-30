@@ -50,8 +50,9 @@ class Disassemble(Base):
 
         # Compile with makefile and optimization flags
         os.system('make -f makefile CC={} "CFLAGS={}" {}'.format(cc, '', command))
-        artifact = '{}_{}.a'.format(os.path.basename(benchmark_path), toolchain)
-        assembly_file = '{}_{}_disassembly.txt'.format(os.path.basename(benchmark_path), toolchain)
+        artifact = '{}_{}.a'.format(toolchain, os.path.basename(benchmark_path))
+        print(artifact)
+        assembly_file = '{}_{}_disassembly.txt'.format(toolchain, os.path.basename(benchmark_path))
 
         # Ensure build artifact generated with makefile execution is valid
         self.check_file_valid(os.path.abspath(artifact))

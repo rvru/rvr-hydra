@@ -8,7 +8,7 @@ hydra/__pycache__
 
 *.mk
 makefile
-*disassembly
+*disassembly.txt
 
 # Prerequisites
 *.d
