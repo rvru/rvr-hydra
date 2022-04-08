@@ -25,7 +25,7 @@ class Generate(Disassemble):
         if self.options['--all']:
             # Run every benchmark and every toolchain
             for benchmark in BENCHMARKS:
-                self.call_disassembly(benchmark, cwd)
+                self.call_disassembly(os.path.join('benchmarks', benchmark), cwd)
         else:
             self.call_disassembly(self.options['<benchmark>'], cwd)
 
