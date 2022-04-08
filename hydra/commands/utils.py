@@ -15,9 +15,9 @@ dependencies included in a folder named 'inc'.
 Additionally, when a new benchmark is added, its folder name needs to be added to
 the constant variables BENCHMARKS in constants.py.
 
-Contact: jenniferhellar@gmail.com
+Contact: jenniferhellar@pm.me
 
-Authors: Jennifer Hellar
+Authors: Jennifer Hellar, Colin Page
 """
 import os
 import sys
@@ -31,7 +31,7 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
         Returns the compiler, disassembler, and default optimization
         flags for the given toolchain.
         """
-        if toolchain == 'arm':
+        if toolchain == 'armcc':
             cc = 'armcc'
             ld = 'armar'
             objdump = 'objdump'
@@ -51,10 +51,16 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
             objdump = 'objdump'
             ccflags = '-c -mthumb -mtune=cortex-m0plus -std=c99 -O2 -Os'
             ldflags = '-nostartfiles -o'
+        elif toolchain == 'rviar':
+        	cc = 'iccriscv'
+        	ld = 'ilinkriscv'
+        	objdump = 'ielfdumpriscv'
+        	ccflags = '--core=RV32IMC -Ohz --no_inline'
+        	ldflags = '--merge_duplicate_sections'
 
         return cc, ld, objdump, ccflags, ldflags
 
-def create_makefiles(cwd, toolchains, verbose):
+def create_makefiles(cwd, toolchains):
     """
     Create New Makefiles.
 
@@ -86,8 +92,6 @@ def create_makefiles(cwd, toolchains, verbose):
             files_already_exist = True
             if 'makefile' in sub_files:
                 for tool in toolchains:
-                    if tool == 'arm':
-                        tool = 'armcc'
                     sub_makefile_name = tool + '.mk'
                     if sub_makefile_name not in sub_files:
                         files_already_exist = False
@@ -99,18 +103,10 @@ def create_makefiles(cwd, toolchains, verbose):
                 os.chdir(cwd)
                 continue
 
-            if verbose:
-                print("Generating new makefiles for the benchmark: {}".format(benchmark_name))
-
-            write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose)
+            write_main_makefile(cwd, sub_path, benchmark_name, toolchains)
             for tool in toolchains:
-                toolchain = tool
-                if tool == 'arm':
-                    tool = 'armcc'
                 sub_makefile_name = tool + '.mk'
-                if verbose:
-                    print("Generating {} for {}".format(sub_makefile_name, benchmark_name))
-                write_sub_makefiles(benchmark_name, sub_makefile_name, toolchain)
+                write_sub_makefiles(benchmark_name, sub_makefile_name, tool)
 
             os.chdir(cwd)
 
@@ -118,7 +114,7 @@ def create_makefiles(cwd, toolchains, verbose):
         print("Error: ", e)
         sys.exit(1)
 
-def write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose):
+def write_main_makefile(cwd, sub_path, benchmark_name, toolchains):
     """
     Make The Parent Makefile.
 
@@ -135,8 +131,7 @@ def write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose):
     source_files = [f for f in os.listdir(source_path) if os.path.isfile(os.path.join(source_path, f))]
     source_files = [f for f in source_files if f.split('.')[1] == 'c' or f.split('.')[1] == 'cpp']
 
-    if verbose:
-        print("Creating the main makefile for {}".format(benchmark_name))
+    print("Creating the main makefile for {}".format(benchmark_name))
 
     with open('makefile', 'w+') as makefile:
         makefile.write('THIS_DIR=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))\n')
@@ -147,8 +142,6 @@ def write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose):
             tool = toolchains[i]
 
             cc, ld, objdump, flags, ldflags = get_cc_objdump_optflags(benchmark_name, tool)
-            if tool == 'arm':
-                tool = 'armcc'
             tool = tool + '.mk'
 
             if i == 0:
@@ -222,7 +215,7 @@ def write_sub_makefiles(benchmark_name, file_name, toolchain):
     cc, ld, objdump, ccflags, ldflags = get_cc_objdump_optflags(benchmark_name, toolchain)
 
     with open(file_name, 'w+') as makefile:
-        if toolchain == 'arm':
+        if toolchain == 'armcc':
             makefile.write('ARM_ROOT=' + os.environ.get('ARM_ROOT') + '\n\n')
 
         makefile.write('CC = ' + cc + '\n')

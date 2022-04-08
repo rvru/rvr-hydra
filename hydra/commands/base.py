@@ -5,9 +5,9 @@ Definitions for both the Base class, an abstract parent class
 for all the other commands, as well as constant variables used
 throughout the program, and a custom error class: BaseError.
 
-Contact: jenniferhellar@gmail.com
+Contact: jenniferhellar@pm.me
 
-Authors: Jennifer Hellar.
+Authors: Jennifer Hellar, Colin Page
 """
 import os
 import sys
@@ -59,7 +59,7 @@ class Base():
                 input_toolchain_supported = True
 
         if input_toolchain_supported is False:
-            raise BaseError('Requested toolchain {} is not supported by RVA. Supported toolchains are: {}' \
+            raise BaseError('Requested toolchain {} is not supported by Hydra. Supported toolchains are: {}' \
                             .format(toolchain, ', '.join(SUPPORTED_TOOLCHAINS)))
 
     def run(self):

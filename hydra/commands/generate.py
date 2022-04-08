@@ -1,9 +1,9 @@
 """
 Tool that runs and combines all of the different sub-commands.
 
-Contact: jenniferhellar@gmail.com
+Contact: jenniferhellar@pm.me
 
-Authors: Jennifer Hellar
+Authors: Jennifer Hellar, Colin Page
 """
 import os
 
@@ -20,7 +20,7 @@ class Generate(Disassemble):
         cwd = os.getcwd()
 
         # Code to find/create makefiles for all of the benchmarks:
-        create_makefiles(cwd, SUPPORTED_TOOLCHAINS, self.options['--verbose'])
+        create_makefiles(cwd, SUPPORTED_TOOLCHAINS)
 
         if self.options['--all']:
             # Run every benchmark and every toolchain
@@ -33,6 +33,7 @@ class Generate(Disassemble):
         """Determine which toolchain(s) to run on the given benchmark."""
         os.chdir(cwd)
         benchmark_path = os.path.abspath(benchmark)
+        print(benchmark_path)
 
         super(Disassemble, self).check_file_valid(benchmark_path)
 

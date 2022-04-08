@@ -4,9 +4,9 @@ Disassemble Class.
 This class disassembles the assembly into something readable by humans.  It
 also defines the default compiler/linker options in get_cc_objdump_optflags().
 
-Contact: jenniferhellar@gmail.com
+Contact: jenniferhellar@pm.me
 
-Authors: Jennifer Hellar
+Authors: Jennifer Hellar, Colin Page
 """
 import os
 
@@ -64,9 +64,8 @@ class Disassemble(Base):
         self.check_file_valid(os.path.abspath(assembly_file))
 
         # Inform user that disassembly has been generated
-        if self.options['--verbose']:
-            print('Disassembly generation successful! The disassembly file, named {}, is stored here: {}' \
-                  .format(assembly_file, os.path.dirname(makefile_path)))
+        print('Disassembly generation successful! The disassembly file, named {}, is stored here: {}' \
+              .format(assembly_file, os.path.dirname(makefile_path)))
 
         return assembly_file
 

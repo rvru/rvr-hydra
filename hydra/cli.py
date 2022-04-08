@@ -2,21 +2,20 @@
 Hydra.
 
 Usage:
-    hydra generate [<benchmark>] [<toolchain>] [--opt <optimization_flag>] [-a | --all] [-v | --verbose]
+    hydra generate [<benchmark>] [<toolchain>] [--opt <optimization_flag>] [-a | --all]
     hydra (-h | --help)
 
 Options:
     --opt <optimization_flag>         The optimization flag(s) to use when compiling.
     -h --help                         Show this screen.
     -a --all                          Run all benchmarks on all toolchains.
-    -v --verbose                      Print what files are being created, and to where.
 
 Examples:
     hydra generate fir_filter arm
 
-Contact: jenniferhellar@gmail.com
+Contact: jenniferhellar@pm.me
 
-Authors: Jennifer Hellar.
+Authors: Jennifer Hellar, Colin Page
 """
 import sys
 
