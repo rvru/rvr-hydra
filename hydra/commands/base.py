@@ -59,7 +59,7 @@ class Base():
                 input_toolchain_supported = True
 
         if input_toolchain_supported is False:
-            raise BaseError('Requested toolchain {} is not supported by RVA. Supported toolchains are: {}' \
+            raise BaseError('Requested toolchain {} is not supported by Hydra. Supported toolchains are: {}' \
                             .format(toolchain, ', '.join(SUPPORTED_TOOLCHAINS)))
 
     def run(self):

@@ -13,4 +13,4 @@ BENCHMARKS = ['WatermanBenchmark', 'fir_filter', 'aha_mont64', 'crc32',
                 'nettle_aes', 'nettle_sha256', 'nsichneu', 'picojpeg', 'qrduino',
                 'sglib_combined', 'slre', 'st', 'statemate', 'ud', 'wikisort']
 
-SUPPORTED_TOOLCHAINS = ['arm', 'rvgcc', 'armgcc', 'armclang']
+SUPPORTED_TOOLCHAINS = ['armcc', 'rvgcc', 'armgcc', 'armclang']

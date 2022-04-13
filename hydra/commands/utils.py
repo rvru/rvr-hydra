@@ -31,7 +31,7 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
         Returns the compiler, disassembler, and default optimization
         flags for the given toolchain.
         """
-        if toolchain == 'arm':
+        if toolchain == 'armcc':
             cc = 'armcc'
             ld = 'armar'
             objdump = 'objdump'
@@ -92,8 +92,6 @@ def create_makefiles(cwd, toolchains, verbose):
             files_already_exist = True
             if 'makefile' in sub_files:
                 for tool in toolchains:
-                    if tool == 'arm':
-                        tool = 'armcc'
                     sub_makefile_name = tool + '.mk'
                     if sub_makefile_name not in sub_files:
                         files_already_exist = False
@@ -110,13 +108,10 @@ def create_makefiles(cwd, toolchains, verbose):
 
             write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose)
             for tool in toolchains:
-                toolchain = tool
-                if tool == 'arm':
-                    tool = 'armcc'
                 sub_makefile_name = tool + '.mk'
                 if verbose:
                     print("Generating {} for {}".format(sub_makefile_name, benchmark_name))
-                write_sub_makefiles(benchmark_name, sub_makefile_name, toolchain)
+                write_sub_makefiles(benchmark_name, sub_makefile_name, tool)
 
             os.chdir(cwd)
 
@@ -153,8 +148,6 @@ def write_main_makefile(cwd, sub_path, benchmark_name, toolchains, verbose):
             tool = toolchains[i]
 
             cc, ld, objdump, flags, ldflags = get_cc_objdump_optflags(benchmark_name, tool)
-            if tool == 'arm':
-                tool = 'armcc'
             tool = tool + '.mk'
 
             if i == 0:
@@ -228,7 +221,7 @@ def write_sub_makefiles(benchmark_name, file_name, toolchain):
     cc, ld, objdump, ccflags, ldflags = get_cc_objdump_optflags(benchmark_name, toolchain)
 
     with open(file_name, 'w+') as makefile:
-        if toolchain == 'arm':
+        if toolchain == 'armcc':
             makefile.write('ARM_ROOT=' + os.environ.get('ARM_ROOT') + '\n\n')
 
         makefile.write('CC = ' + cc + '\n')

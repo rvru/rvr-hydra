@@ -58,7 +58,6 @@ class Disassemble(Base):
         self.check_file_valid(os.path.abspath(artifact))
 
         # Disassemble build artifact
-        # os.system('{} -d --section=.text {} > {}'.format(objdump, artifact, assembly_file))
         os.system('{} -d {} > {}'.format(objdump, artifact, assembly_file))
 
         # Ensure disassembly dump was successful
