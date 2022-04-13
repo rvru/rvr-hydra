@@ -17,8 +17,7 @@ benchmarks/README.
 
 ##### 1. Prepare the setup script for toolchain installation paths.
 
-Create a new file **rvr-hydra/bin/setup_script_env.bash** based on the provided
-template setup_script_env_template.bash. Keep this new file open in the background, as you will be editing it throughout the setup process.
+Create a new file **rvr-hydra/bin/setup_script_env.bash** based on the provided template setup_script_env_template.bash. Keep this new file open in the background, as you will be editing it throughout the setup process.
 
 ##### 2. Set up the RISC-V gcc compiler.
 Download the pre-built [RISC-V GNU toolchain](https://www.sifive.com/software) from the SiFive Software page. Untar the package to the desired install location. Note the directory path e.g. /home/your-username/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14
@@ -80,7 +79,7 @@ Edit line 15 of setup_script_env.bash with the path to the armclang executable.
 export PATH=/home/your-username/ARM_Compiler_6.xxxx/bin:${PATH}
 ```
 
-###### Update toolchain paths and license information.
+###### Update product definition and license information.
 Edit lines 17-18 of the setup_script_env.bash file with the appropriate paths to the Arm license port and product definition file e.g. for an ARM DS install,
 ```console
 export ARMLMD_LICENSE_FILE=port@license-server-host
@@ -117,12 +116,19 @@ source rvr-hydra/bin/setup_script_env.bash
 ```
 
 ##### 2. Generate the desired disassembly:
-On all benchmarks/toolchains at once:
-* See the list in hydra/commands/constants.py
-* `hydra generate [--all | -a]`
+On all benchmarks/toolchains at once (see the list in hydra/commands/constants.py):
+```console
+hydra generate [--all | -a]
+```
 
 On a single benchmark:
-* `hydra generate 'benchmark' 'toolchain'`
+```console
+hydra generate [benchmark] [toolchain]
+```
+e.g.
+```console
+hydra generate benchmark/fir_filter armgcc
+```
 
 ##### 4. Deactivate the virtual environment:
 ```console
