@@ -51,6 +51,12 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
             objdump = 'objdump'
             ccflags = '-c -mthumb -mtune=cortex-m0plus -std=c99 -O2 -Os'
             ldflags = '-nostartfiles -o'
+        elif toolchain == 'armclang':
+        	cc = 'armclang'
+        	ld = 'armar'
+        	objdump = 'objdump'
+        	ccflags = '-c -target=arm-arm-none-eabi -mthumb -mcpu=Cortex-M0plus -std=c99 -fno-inline-functions -Oz'
+        	ldflags = '-r'
 
         return cc, ld, objdump, ccflags, ldflags
 
