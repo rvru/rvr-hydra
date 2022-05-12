@@ -36,20 +36,20 @@ def get_cc_objdump_optflags(benchmark_name, toolchain):
             ld = 'armar'
             objdump = 'objdump'
             ARM_ROOT = os.environ.get('ARM_ROOT')
-            ccflags = '-c --preinclude=' + ARM_ROOT + 'include/stdint.h --cpu=Cortex-M0plus --c99 --no-inline -O2 -Ospace'
+            ccflags = '-c --preinclude=' + ARM_ROOT + 'include/stdint.h --cpu=Cortex-M0plus --c99 --no-inline -Ospace'
             # ccflags = '-c --preinclude=$(ARM_ROOT)include/stdint.h --cpu=Cortex-M4 --c99 --no-inline -O2 -Ospace'
             ldflags = '-r'
         elif toolchain == 'rvgcc':
             cc = 'riscv64-unknown-elf-gcc'
             ld = 'riscv64-unknown-elf-gcc'
             objdump = 'riscv64-unknown-elf-objdump'
-            ccflags = '-c -std=c99 -march=rv32imc -mabi=ilp32 -msave-restore -fno-inline -O2 -Os'
+            ccflags = '-c -std=c99 -march=rv32imc -mabi=ilp32 -msave-restore -fno-inline -fno-ipa-cp -fno-ipa-sra -Os'
             ldflags = '-nostartfiles -march=rv32imc -mabi=ilp32 -o'
         elif toolchain == 'armgcc':
             cc = 'arm-none-eabi-gcc'
             ld = 'arm-none-eabi-gcc'
             objdump = 'objdump'
-            ccflags = '-c -mthumb -mtune=cortex-m0plus -std=c99 -O2 -Os'
+            ccflags = '-c -mthumb -mtune=cortex-m0plus -std=c99 -fno-inline -fno-toplevel-reorder -Os'
             ldflags = '-nostartfiles -o'
         elif toolchain == 'armclang':
         	cc = 'armclang'
