@@ -8,7 +8,7 @@ Contact: jenniferhellar@gmail.com
 
 Authors: Jennifer Hellar
 """
-BENCHMARKS = ['WatermanBenchmark', 'fir_filter', 'aha_mont64', 'crc32',
+BENCHMARKS = ['waterman', 'fir_filter', 'aha_mont64', 'crc32',
                 'cubic', 'edn', 'huffbench', 'matmult_int', 'minver', 'nbody',
                 'nettle_aes', 'nettle_sha256', 'nsichneu', 'picojpeg', 'qrduino',
                 'sglib_combined', 'slre', 'st', 'statemate', 'ud', 'wikisort']
