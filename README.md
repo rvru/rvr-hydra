@@ -111,7 +111,6 @@ deactivate
 ### EXECUTION:
 ##### 1. Activate the virtual environment and add the toolchain executables to PATH:
 ```console
-source rvr-hydra/env/bin/activate
 source rvr-hydra/bin/setup_script_env.bash
 ```
 

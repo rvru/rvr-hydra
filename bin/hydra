@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 file=$0
 tool=`basename $file`
@@ -6,4 +6,4 @@ fullpath=`readlink -f $file`
 filepath=`dirname $fullpath`
 
 source $filepath/../env/bin/activate
-python $filepath/../hydra/main.py $@
+python3 $filepath/../hydra/main.py $@
